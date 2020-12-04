@@ -27,24 +27,16 @@ object Day04 {
     }
 
     private fun mapData(input: List<String>): List<Passport> {
-        val reqFields = setOf("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid")
-
-        val objMap = mutableMapOf<String, String>()
-        var passportNumber = 0
-        val passportsList = mutableListOf<Passport>()
-        input.forEach { line ->
+        val bufferMap = mutableMapOf<String, String>()
+        return input.mapNotNull { line ->
             if (line.isNotBlank()) {
-                objMap.putAll(extractDataFromLine(line))
+                bufferMap.putAll(extractDataFromLine(line))
+                null
             } else {
                 //end previous passport infos
-                createPassport(objMap, reqFields)?.let {
-                    passportsList.add(it)
-                }
-                objMap.clear()
-                passportNumber++
+                createPassport(bufferMap).also { bufferMap.clear() }
             }
         }
-        return passportsList
     }
 
     private fun extractDataFromLine(line: String) = line.split(" ")
@@ -54,7 +46,8 @@ object Day04 {
                         ?.let { it[0] to it[1] }
             }
 
-    private fun createPassport(data: Map<String, String>, reqFields: Collection<String>): Passport? {
+    private fun createPassport(data: Map<String, String>): Passport? {
+        val reqFields = setOf("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid")
         val isValid = data.keys.containsAll(reqFields)
         log("Data: $data - valid: ${isValid.let { if (it) green(it) else red(it) }}")
         return if (isValid) {
@@ -131,11 +124,4 @@ data class Passport(
             ?: false
 }
 
-object Log {
-    private val debug = false
-    fun log(s: String) {
-        if (debug) println(s)
-    }
-}
-
-fun Boolean.toColor() = if (this) green(this) else red(this)
+private fun Boolean.toColor() = if (this) green(this) else red(this)

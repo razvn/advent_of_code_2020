@@ -35,3 +35,10 @@ object Colors {
     fun yellow(s: Any) = "$ANSI_YELLOW $s $ANSI_RESET"
     fun red(s: Any) = "$ANSI_RED $s $ANSI_RESET"
 }
+
+object Log {
+    private val debug = false
+    fun log(s: String) {
+        if (debug) println(s)
+    }
+}
