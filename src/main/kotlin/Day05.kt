@@ -1,22 +1,30 @@
 import Colors.green
-import Colors.red
-import Colors.yellow
 import Log.log
 import kotlin.math.ceil
 
-object Day05 {
-    private const val DAY = 5
-    operator fun invoke() {
-        val input = getInput()
+fun main() = Day05()
 
-        part1(input)
-        part2(input)
+object Day05 : Day(5) {
+    override fun invoke() {
+        val input = getInputData { decodePosition(it) }
+
+        part1(input) { seats ->
+            seats.maxByOrNull { it.id }?.toString() ?: "<NULL>"
+        }
+
+        part2(input) { seats ->
+            val seatsIds = seats.map(Seat::id)
+
+            seatsIds.firstOrNull {
+                val isValidPreviousId = !seatsIds.contains(it + 1) && seatsIds.contains(it + 2)
+                log("Id: $it - ${isValidPreviousId.toColor()}")
+                isValidPreviousId
+            }?.let {
+                (it + 1).toString() // the place it's the next id to the one found
+            } ?: "<NULL>"
+        }
     }
 
-    private fun getInput(): List<Seat> = Tools.readInput(DAY, test = false)
-        .map { decodePosition(it) }
-
-    data class Seat(val row: Int, val col: Int, val id: Int = row * 8 + col)
 
     private fun decodePosition(data: String): Seat {
         val row = calcPosition(data.take(7), 'F', 127)
@@ -40,31 +48,5 @@ object Day05 {
         return max
     }
 
-    private fun part1(input: List<Seat>) {
-        input.map {
-            log("\t Seat: ${yellow(it)}")
-        }
-        input.maxByOrNull { it.id }?.let {
-            println("Part 1: Max seat: ${yellow(it)}")
-        } ?: println("Part 1: NULL")
-    }
-
-    private fun part2(input: List<Seat>) {
-        val idsList = input.map {
-            it.id
-        }
-        idsList.filter {
-            val contains = !idsList.contains(it + 1) && idsList.contains(it + 2)
-            log("Id: $it - ${contains.toColor()}")
-            contains
-        }.also {
-            it.firstOrNull()?.let { id ->
-                println("Part 2: Seat ID: ${green(id + 1)}")
-            } ?: println(red("Part 2: None found"))
-        }
-    }
-}
-
-fun main() {
-    Day05()
+    data class Seat(val row: Int, val col: Int, val id: Int = row * 8 + col)
 }

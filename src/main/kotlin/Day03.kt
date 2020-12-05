@@ -1,49 +1,35 @@
-object Day03 {
-    private const val DAY = 3
-    operator fun invoke() {
-        val input = getInput()
+fun main() = Day03()
 
-        part1(input)
-        part2(input)
-    }
+object Day03 : Day(3) {
+    override fun invoke() {
+        val input = getInputData().filter { it.isNotBlank() }
 
-    private fun getInput(): List<String> {
-        return Tools.readInput(DAY, test = false)
-                .filter { it.isNotBlank() }
-    }
+        part1(input) {
+            countTrees(input, 3, 1).toString()
+        }
 
-    private fun part1(input: List<String>) {
-        val treeCount = countTrees(input, 3, 1)
-        println("Part 1: trees (3,1): ${Colors.yellow(treeCount)}")
-    }
-
-    private fun countTrees(input: List<String>, stepRight: Int, stepDown: Int): Int {
-        return input
-                .filterIndexed { idx, _ -> idx % stepDown == 0 }
-                .filterIndexed { idx, it ->
-                    val relativeRight = (idx * stepRight) % it.length
-                    it[relativeRight] == '#'
-                }
-                .count()
-    }
-
-    private fun part2(input: List<String>) {
-        val res = listOf(
+        part2(input) {
+            val result = listOf(
                 1 to 1,
                 3 to 1,
                 5 to 1,
                 7 to 1,
                 1 to 2
-        ).map {
-            it to countTrees(input, it.first, it.second)
-        }.toMap()
+            ).map {
+                it to countTrees(input, it.first, it.second)
+            }.toMap()
 
-        print("Part 2: trees ")
-        res.map { (k, v) -> print("$k: $v | ") }
-        println("Result: ${res.values} = ${Colors.green(res.values.reduce { acc, i -> acc * i })}")
+            result.values.reduce { acc, i -> acc * i }.toString()
+        }
     }
-}
 
-fun main() {
-    Day03()
+    private fun countTrees(input: List<String>, stepRight: Int, stepDown: Int): Int {
+        return input
+            .filterIndexed { idx, _ -> idx % stepDown == 0 }
+            .filterIndexed { idx, it ->
+                val relativeRight = (idx * stepRight) % it.length
+                it[relativeRight] == '#'
+            }
+            .count()
+    }
 }

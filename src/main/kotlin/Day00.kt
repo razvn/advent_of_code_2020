@@ -1,23 +1,15 @@
-object Day00 {
-    private const val DAY = 0
-    operator fun invoke() {
-        val input = getInput()
+fun main() = Day00()
 
-        part1()
-        part2()
+object Day00 : Day(0) {
+    override fun invoke() {
+        val input = getInputData { it }
+
+        part1(input) {
+            "TODO"
+        }
+
+        part2(input) {
+            "TODO"
+        }
     }
-
-    private fun getInput(): List<Int> = Tools.readInputInts(DAY)
-
-    private fun part1() {
-
-    }
-
-    private fun part2() {
-
-    }
-}
-
-fun main() {
-    Day00()
 }
