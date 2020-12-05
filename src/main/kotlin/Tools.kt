@@ -1,3 +1,5 @@
+import Colors.green
+import Colors.red
 import java.nio.charset.Charset
 
 object Tools {
@@ -42,3 +44,5 @@ object Log {
         if (debug) println(s)
     }
 }
+
+fun Boolean.toColor() = if (this) green(this) else red(this)

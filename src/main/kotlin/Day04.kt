@@ -123,5 +123,3 @@ data class Passport(
     private fun String.isIntInRange(start: Int, end: Int): Boolean = this.toIntOrNull()?.let { it in start..end }
             ?: false
 }
-
-private fun Boolean.toColor() = if (this) green(this) else red(this)
