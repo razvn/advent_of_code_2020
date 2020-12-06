@@ -33,15 +33,18 @@ object Colors {
     const val ANSI_CYAN_BACKGROUND = "\u001B[46m"
     const val ANSI_WHITE_BACKGROUND = "\u001B[47m"
 
-    fun green(s: Any) = "$ANSI_GREEN $s $ANSI_RESET"
-    fun yellow(s: Any) = "$ANSI_YELLOW $s $ANSI_RESET"
-    fun red(s: Any) = "$ANSI_RED $s $ANSI_RESET"
+    fun green(s: Any) = "$ANSI_GREEN$s$ANSI_RESET"
+    fun yellow(s: Any) = "$ANSI_YELLOW$s$ANSI_RESET"
+    fun red(s: Any) = "$ANSI_RED$s$ANSI_RESET"
 }
 
 object Log {
     private val debug = false
     fun log(s: String) {
         if (debug) println(s)
+    }
+    fun flog(s: String) {
+        println(s)
     }
 }
 
