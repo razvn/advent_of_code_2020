@@ -4,7 +4,7 @@ import Log.log
 
 fun main() = Day04()
 
-object Day04 : Day(4) {
+object Day04 : Day(4, false) {
     override fun invoke() {
         val input = getInputData()
 
@@ -27,6 +27,11 @@ object Day04 : Day(4) {
                 //end previous passport infos
                 createPassport(bufferMap).also { bufferMap.clear() }
             }
+        }.let { passports -> // handle last line if not a blank one
+            if (bufferMap.isEmpty()) passports
+            else createPassport(bufferMap)?.let {
+                passports + listOf(it)
+            } ?: passports
         }
     }
 
