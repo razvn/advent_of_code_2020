@@ -4,9 +4,9 @@ import java.nio.charset.Charset
 
 object Tools {
     const val fileTemplate = "Day%02dInput.txt"
-    const val testfileTemplate = "Day%02dTest.txt"
-    fun readInput(day: Int, test: Boolean = false): List<String> {
-        val fileName = (if (test) testfileTemplate else fileTemplate).format(day)
+    const val testfileTemplate = "Day%02dTest%s.txt"
+    fun readInput(day: Int, test: Boolean = false, testSuffix: String = ""): List<String> {
+        val fileName = if (test) testfileTemplate.format(day, testSuffix) else fileTemplate.format(day)
         val resource = this::class.java.getResource(fileName) ?: throw Exception("File $fileName not found")
         return resource.readText(Charset.defaultCharset()).split("\n").map { it.trim() }
     }
