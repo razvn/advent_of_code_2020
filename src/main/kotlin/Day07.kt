@@ -1,6 +1,8 @@
 import Log.flog
 import Log.log
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 fun main() = Day07()
 
 data class TreeNode(val name: String, val nb: Int) {
@@ -24,6 +26,7 @@ data class TreeNode(val name: String, val nb: Int) {
     }
 }
 
+@ExperimentalTime
 object Day07 : Day(7, false ) {
 
     private tailrec fun containsName(nodes:List<TreeNode>, name: String, map: Map<String, List<TreeNode>>): Boolean  = when {

@@ -1,5 +1,7 @@
 import Log.log
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 fun main() = Day09()
 
 class Stack() {
@@ -29,6 +31,7 @@ class Stack() {
     }
 }
 
+@ExperimentalTime
 object Day09 : Day(9, false) {
     override fun invoke() {
         val input = getInputData() { it.toLong() }

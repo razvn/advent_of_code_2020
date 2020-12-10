@@ -34,6 +34,7 @@ object Colors {
     const val ANSI_WHITE_BACKGROUND = "\u001B[47m"
 
     fun green(s: Any) = "$ANSI_GREEN$s$ANSI_RESET"
+    fun blue(s: Any) = "$ANSI_BLUE$s$ANSI_RESET"
     fun yellow(s: Any) = "$ANSI_YELLOW$s$ANSI_RESET"
     fun red(s: Any) = "$ANSI_RED$s$ANSI_RESET"
 }

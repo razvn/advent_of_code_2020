@@ -1,5 +1,9 @@
+import kotlin.time.ExperimentalTime
+
+@ExperimentalTime
 fun main() = Day01()
 
+@ExperimentalTime
 object Day01 : Day(1) {
     private val input = getInputData { it.toIntOrNull() }.filterNotNull()
     override fun invoke() {

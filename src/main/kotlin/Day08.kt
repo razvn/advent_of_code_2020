@@ -1,7 +1,10 @@
 import Log.log
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 fun main() = Day08()
 
+@ExperimentalTime
 object Day08 : Day(8, false) {
     override fun invoke() {
         val input = getInputData { it }

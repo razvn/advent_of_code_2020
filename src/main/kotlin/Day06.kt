@@ -1,9 +1,12 @@
 import Colors.green
 import Colors.yellow
 import Log.log
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 fun main() = Day06()
 
+@ExperimentalTime
 object Day06 : Day(6, false) {
     override fun invoke() {
         val input = getInputData()

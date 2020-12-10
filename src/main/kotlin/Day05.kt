@@ -1,9 +1,12 @@
 import Colors.green
 import Log.log
 import kotlin.math.ceil
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 fun main() = Day05()
 
+@ExperimentalTime
 object Day05 : Day(5) {
     override fun invoke() {
         val input = getInputData { decodePosition(it) }

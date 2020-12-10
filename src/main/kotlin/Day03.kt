@@ -1,5 +1,9 @@
+import kotlin.time.ExperimentalTime
+
+@ExperimentalTime
 fun main() = Day03()
 
+@ExperimentalTime
 object Day03 : Day(3) {
     override fun invoke() {
         val input = getInputData().filter { it.isNotBlank() }

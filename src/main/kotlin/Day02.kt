@@ -1,5 +1,9 @@
+import kotlin.time.ExperimentalTime
+
+@ExperimentalTime
 fun main() = Day02()
 
+@ExperimentalTime
 object Day02: Day(2) {
     override fun invoke() {
         val regex = "(\\d+)-(\\d+) (\\w): (\\w+)".toRegex()
