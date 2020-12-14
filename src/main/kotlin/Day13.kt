@@ -1,5 +1,7 @@
+import java.io.File
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import kotlin.math.min
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
@@ -9,12 +11,8 @@ fun main() = Day13()
 @ExperimentalTime
 object Day13 : Day(13, testData = false, "5") {
 
-    fun validDivider(nb: Long, data: List<Pair<Long, Int>>): Boolean =
-        data.all {
-            (nb + it.second) % it.first == 0L
-        }
-
     override fun invoke() {
+
         val input = getInputData() { it }
 
         part1(input) { data ->
@@ -28,6 +26,15 @@ object Day13 : Day(13, testData = false, "5") {
                 ?.let {
                     "${it.first * (it.second - timestamp)}"
                 } ?: "NONE FOUND"
+        }
+
+        part1(input) { data ->
+            val t = data.first().toInt()
+            val ids = data[1].split(",").filter { it != "x" }.map { it.toInt() }
+            val diff = ids.map { (it * ((t / it) + 1)) - t }
+            diff.withIndex().minByOrNull { it.value }?.let {
+                "alt: ${ids[it.index] * it.value}"
+            } ?: "ERROR"
         }
 
         part2(input) { data ->
